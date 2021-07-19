@@ -1,17 +1,19 @@
 <template>
   <v-app>
     <v-app-bar flat class="primary">
-      <v-btn text href="/"><v-card-title>Matthew Ko</v-card-title></v-btn>
+      <v-btn class="no-active" text to="/">
+        <v-card-title>Matthew Ko</v-card-title>
+      </v-btn>
       <v-spacer></v-spacer>
       <div v-for="page in pages" :key="page.name">
-        <v-btn text :to="page.route">
+        <v-btn class="no-active" text :to="page.route">
           <v-icon class="mr-2">{{page.icon}}</v-icon>
           {{page.name}}
         </v-btn>
       </div>
     </v-app-bar>
     <v-main>
-      <router-view/>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
@@ -39,10 +41,9 @@ export default {
     color: lightgray;
     font-family: Helvetica
   }
-  a {color: white; text-decoration: none;}         /* Unvisited link  */
-  a:visited {color: white; text-decoration: none;}  /* Visited link    */
-  a:hover {color: white; text-decoration: none;}    /* Mouse over link */
-  a:active {color: white; text-decoration: none;} 
+  .v-btn--active.no-active::before {
+    opacity: 0 !important;
+  }
   .card {
     background-color: #494949
   }

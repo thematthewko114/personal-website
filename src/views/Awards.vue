@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <v-container>
-        <v-card-title class="title">Awards and Certificates</v-card-title>
-        <div v-if="awards.length">
+      <v-card class="card">
+        <v-card-title style="font-size:30px">Awards and Certificates</v-card-title>
+      </v-card>
+      <div v-if="awards.length">
         <div v-for="award in awards" :key="award.id">
           <v-card class="my-2 card">
             <v-card-title><b>{{award.name}}</b></v-card-title>

@@ -2,9 +2,9 @@
   <v-app>
     <v-container>
       <v-card>
-        <v-btn to="/projects">Return to Projects</v-btn>
+        <v-btn to="/projects" class="my-4 grey">Return to Projects</v-btn>
         <h1>Reaction Timer</h1>
-        <v-btn @click="start" :disabled="isPlaying" class="px-2">Play</v-btn>
+        <v-btn @click="start" :disabled="isPlaying" class="px-2 my-4 green">Play</v-btn>
       </v-card>
       <Block v-if="isPlaying" :delay="delay" @end="endGame"></Block>
       <Result v-if="showResults" :score="score"></Result>

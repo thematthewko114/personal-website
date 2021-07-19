@@ -2,6 +2,7 @@
   <v-app>
     <v-container>
       <v-card-title class="title ma-2">This is a personal website of Matthew Ko</v-card-title>
+      <v-img src="../assets/KoWangPhoto.jpg"></v-img>
       <v-card class="card">
         <v-container>
           <v-card-title v-if="home.length">{{home[0].text}}</v-card-title>

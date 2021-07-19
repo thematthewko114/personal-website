@@ -46,6 +46,11 @@ const routes = [
     component: () => import('../views/ReadFile.vue')
   },
   {
+    path: '/test',
+    name: 'Test',
+    component: () => import('../views/Test.vue')
+  },
+  {
     path: "*", //invalid path
     name: 'Error',
     component: () => import('../views/Error.vue')

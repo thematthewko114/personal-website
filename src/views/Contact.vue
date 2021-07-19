@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-container>
-      <h2>Contact</h2>
+      <v-card class="card my-2">
+        <v-card-title style="font-size:30px">Contacts</v-card-title>
+      </v-card>
       <v-card class="card">
         <v-container>
           <div v-for="contact in contacts" :key="contact.text">

@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-container>
-      <v-card-title class="title">Profile</v-card-title>
+      <v-card class="card my-2">
+        <v-card-title style="font-size:30px">Profile</v-card-title>
+      </v-card>
       <v-card class="card">
         <v-card-title><b>About Me</b></v-card-title>
         <p v-if="introduction.length" class="pa-4">{{introduction[0].text}}</p>

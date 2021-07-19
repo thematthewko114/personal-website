@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-container>
-        <v-card-title class="title">Projects</v-card-title>
+      <v-card class="card">
+        <v-card-title style="font-size:30px">Projects</v-card-title>
+      </v-card>
         <div v-if="projects.length">
         <div v-for="project in projects" :key="project.id">
           <v-card class="my-2 card">
