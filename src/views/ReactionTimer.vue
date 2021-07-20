@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="center">
     <v-container>
       <v-card>
         <v-btn to="/projects" class="my-4 grey">Return to Projects</v-btn>
@@ -41,8 +41,8 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style scoped>
+.center {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
