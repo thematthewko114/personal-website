@@ -10,7 +10,8 @@
             <v-card-title><b>{{project.name}}</b></v-card-title>
             <v-container>
               <p class="ma-4">{{project.description}}</p>
-              <v-btn class="ma-4" color="green" :to="project.route"><v-icon class="mr-2">mdi-arrow-right</v-icon>Visit Project</v-btn>
+              <v-btn v-if="project.redirect==true" class="ma-4" color="green" :href="project.route"><v-icon class="mr-2">mdi-arrow-right</v-icon>Visit Project</v-btn>
+              <v-btn v-else class="ma-4" color="green" :to="project.route"><v-icon class="mr-2">mdi-arrow-right</v-icon>Visit Project</v-btn>
             </v-container>
           </v-card>
         </div>

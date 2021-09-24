@@ -120,19 +120,22 @@
       "id": "dflutbdrtrlhd",
       "name": "YouTeam - Team Management for YouTuber Groups",
       "description": "A final-year project as a CS student at HKU SPACE. The website focuses on the usages of Vue.js, Firebase, Plotly.js, and YouTube Data API. Gained intermediate experience with authentication, NoSQL databases, state management, RESTful API, and web hosting.",
-      "route": "https://fyp-website-3f6ab.web.app/login"
+      "route": "https://fyp-website-3f6ab.web.app/login",
+      "redirect": true
     },
     {
       "id": "haebuw3lrivae",
       "name": "Simple Reaction Timer",
       "description": "A simple reaction timer for me to learn/refresh the features of Vue 3. This project mainly displays my skills on event handling, where users can react at different intervals to get different results popped up on the screen.",
-      "route": "/reaction-timer"
+      "route": "/reaction-timer",
+      "redirect": false
     },
     {
       "id": "setbserbsesb4",
       "name": "File Reader",
       "description": "A page for users to import Excel or CSV files and display basic details in a data table",
-      "route": "/file-reader"
+      "route": "/file-reader",
+      "redirect": false
     }
   ]
 }
