@@ -46,9 +46,14 @@ const routes = [
     component: () => import('../views/ReadFile.vue')
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: () => import('../views/Test.vue')
+    path: '/learnings',
+    name: 'Learnings',
+    component: () => import('../views/Learnings.vue')
+  },
+  {
+    path: '/physics/linearmotionconverter',
+    name: 'Linear Motion Converter',
+    component: () => import("../views/LinearMotionConverter.vue")
   },
   {
     path: "*", //invalid path

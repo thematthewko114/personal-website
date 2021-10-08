@@ -62,7 +62,7 @@
       "company": "Carnot Innovations Limited",
       "period": "Jun 2020 - Aug 2020",
       "content": "For the first half of the internship, I took part in data analysis on 6 different buildings in Central, Hong Kong. I gained experience in generating data reports. For the second half of the internship, I returned to my original role for web development. I assisted in the development of private websites for 2 of the mentioned 6 buildings, and display the data trends of each sensor within a period of time. I gained advanced knowledge in web development and project.", 
-      "tools": "Data Science: DBeaver, Anaconda, Pycharm, Jupyter Notebook. Web Development: GitHub, Laragon, Vue CLI, Plotly.js, Vue.js. Project Management: Slack, Notion"
+      "tools": "Data Science: DBeaver, Anaconda, Pycharm, Jupyter Notebook. Web Development: GitHub, Laragon, Vue CLI, Plotly.js, Vue.js. Project Management: Slack"
     },
     {
       "id": "ljiebsrbnserno",
@@ -74,7 +74,9 @@
       "id": "drnbdrntiosrny",
       "name": "Frontend Developer Intern",
       "company": "Carnot Innovations Limited",
-      "period": "Jun 2021 - Aug 2021"
+      "period": "Jun 2021 - Aug 2021",
+      "content": "I refactored hard-coded components with Plotly.js data charts into fully customisable widgets. I also added search filters and updating loading methods for outdated pages. At last, I created a path splitting algorithm to a point mapping page for the team's fellow data scientists to upload, configure, and download CSV points lists, with auto-suggestions for sensors and sensor names referencing a dictionary.",
+      "tools": "Backend Integreation: DBeaver, Anaconda, Pycharm, Jupyter Notebook, Flask. Web Development: GitHub, Laragon, Vue CLI, Plotly.js, Vue.js. Project Management: Slack, Notion"
     }
   ],
   "homepage": [
@@ -115,6 +117,85 @@
       "text": "I am a year 2 student currently enrolled in the Associate of Engineering (Computer Science) from HKU SPACE. I have been admitted to the Bachelor of Engineering (Computer Engineering) programme of CUHK for the upcoming semester. I take pleasure from web development, having hands-on experience on web development in the last summer at Carnot Innovations Limited. I would also like to take part in other roles in the IT industry, primarily related to software engineering. I have acquired several important skills through my internship and projects, including UX/UI design for web and mobile users, and intermediate levels on the usage of NoSQL databases and REST APIs. Though I have experience in frontend design, I would also like to get my hands on backend operations. I have several hobbies, including playing football, drums (achieving Trinity College Rock & Pop grade 8 pass with distinction), and reading books on 1914-1945 war history."
     }
   ],
+  "learnings": [
+    {
+      "id": "awrgbiluear",
+      "title": "Introduction to Computer Programming",
+      "institute": "HKU SPACE",
+      "period": "Year 1 Semester 1",
+      "description": "This is an introductory course to programming in Python. Course teaching includes data types, variables, strings, flow Control, selections, loops, functions, lists and tuples, data file I/O, dictionaries, and a mini I/O project of a shopping order into a .txt file"
+    },
+    {
+      "id": "awlbrviuaweb",
+      "title": "Computer Architecture",
+      "institute": "HKU SPACE",
+      "period": "Year 1 Semester 1",
+      "description": "This course includes the introduction to number representation formats, basic knowledge to digital logic, logic manipulation and memory control"
+    },
+    {
+      "id": "aekrgbuaerig",
+      "title": "Intorduction to Engineering",
+      "institute": "HKU SPACE",
+      "period": "Year 1 Semester 2",
+      "description": "This course includes basic engineering physics in mechanics and electromagnetism, data chart display via Octave, signal and network systems"
+    },
+    {
+      "id": "aelignlshrt",
+      "title": "Introduction to Data Stuctures and Algorithms",
+      "institute": "HKU SPACE",
+      "period": "Year 1 Semester 2",
+      "description": "This course is an extension to Introduction to Computer Programming, it includes lists, stacks and queues manipulation, binary tree and graph calculations, and searching and sorting methodologies."
+    },
+    {
+      "id": "aergbilauergbi",
+      "title": "Mathematics to Computing",
+      "institute": "HKU SPACE",
+      "period": "Year 2 Semester 1",
+      "description": "Also known as discrete mathematics. Materials include basic logic, set theorem and functions, mathimatical induction and recursion, counting and discrete probability, and graph theory."
+    },
+    {
+      "id": "drinlbdtsjgbn",
+      "title": "Object-Oriented Programming",
+      "institute": "HKU SPACE",
+      "period": "Year 2 Semester 1",
+      "description": "This is a introductory course to Java. It includes every feature from the Introduction to Computer Programming course plus class features, exception handling and GUI programming"
+    },
+    {
+      "id": "dfbndltjon",
+      "title": "Internet Programming",
+      "institute": "HKU SPACE",
+      "period": "Year 2 Semester 1",
+      "description": "This course introduces HTML, CSS and JavaScript for frontend programming. It also provides a breif introduction to Bootstrap, ASP, PHP, and some principles of software engineering."
+    },
+    {
+      "id": "gfbndtoidiyb",
+      "title": "Project on Knowledge Products Developement",
+      "institute": "HKU SPACE",
+      "period": "Year 2",
+      "description": "This is a final year project course. Teachings included students proposing their pwon project ideas and integrating them and report to their supervisor every two weeks, recording progress and their product cycle."
+    },
+    {
+      "id": "udrnitbinuntiu",
+      "title": "Introduction to Database Systems",
+      "institute": "HKU SPACE",
+      "period": "Year 2 Semester 2",
+      "description": "This course focuses on SQL database modelling via Apache OpenOffice. Content includes modelling, normalization, SQL commands, NOSQL databases. It also contains a project where a stock list of shoe purchases has to be store in the database."
+    },
+    {
+      "id": "srtbnruikti",
+      "title": "Introduction to Computer Organisation",
+      "institute": "HKU SPACE",
+      "period": "Year 2 Semester 2",
+      "description": "This course serves as an extension to the Introduction to Digital Logic Circuits course. It introduced the use of assembly language and the usage of intruction sets, the features of single and multiple cycle processors and pipelining"
+    },
+    {
+      "id": "jafbuisenib",
+      "title": "Problem Solving by Programming",
+      "institute": "CUHK",
+      "period": "Year 1 Semester 1",
+      "description": "An introductory course to the C language"
+    }
+  ],
   "projects": [
     {
       "id": "dflutbdrtrlhd",
@@ -135,6 +216,13 @@
       "name": "File Reader",
       "description": "A page for users to import Excel or CSV files and display basic details in a data table",
       "route": "/file-reader",
+      "redirect": false
+    },
+    {
+      "id": "rtbeterbgfbrtsb",
+      "name": "Linear Motion Converter",
+      "description": "A page for users to input 3 parameters for linear motion, and displays the rest of the parameters",
+      "route": "/physics/linearmotionconverter",
       "redirect": false
     }
   ]

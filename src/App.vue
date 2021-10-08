@@ -26,7 +26,8 @@ export default {
     return {
       pages: [
         {name: 'Profile', icon: 'mdi-form-select', route: '/profile'},
-        {name: 'Projects', icon: 'mdi-tools', route: 'projects'},
+        {name: 'Projects', icon: 'mdi-tools', route: '/projects'},
+        {name: 'Learnings', icon: 'mdi-book', route: '/learnings'},
         {name: 'Experience', icon: 'mdi-bag-personal', route: '/experience'},
         {name: 'Awards and Certificates', icon: 'mdi-trophy-award', route: '/awards'},
         {name: 'Contacts', icon: 'mdi-contacts', route: '/contacts'}
