@@ -62,6 +62,7 @@ export default {
       fetch(url)
       .then(response => response.json())
       .then(data => {
+        this.data = null
         this.error = false
         data.wind.deg2 = this.convertDirection(data.wind.deg)
         this.data = data
