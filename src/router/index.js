@@ -36,14 +36,14 @@ const routes = [
     component: () => import('../views/Contact.vue')
   },
   {
-    path: "/reaction-timer",
+    path: "/projects/reaction-timer",
     name: 'Reaction Timer',
-    component: () => import('../views/ReactionTimer.vue')
+    component: () => import('../views/Projects/ReactionTimer.vue')
   },
   {
-    path: '/file-reader',
+    path: '/projects/file-reader',
     name: 'File Reader',
-    component: () => import('../views/ReadFile.vue')
+    component: () => import('../views/Projects/ReadFile.vue')
   },
   {
     path: '/learnings',
@@ -51,9 +51,14 @@ const routes = [
     component: () => import('../views/Learnings.vue')
   },
   {
-    path: '/physics/linearmotionconverter',
+    path: '/projects/linearmotionconverter',
     name: 'Linear Motion Converter',
-    component: () => import("../views/LinearMotionConverter.vue")
+    component: () => import("../views/Projects/LinearMotionConverter.vue")
+  },
+  {
+    path: '/projects/cityweather',
+    name: 'Current Weather of City',
+    component: () => import("../views/Projects/CityWeather.vue")
   },
   {
     path: "*", //invalid path

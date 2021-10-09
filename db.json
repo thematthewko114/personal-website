@@ -208,21 +208,28 @@
       "id": "haebuw3lrivae",
       "name": "Simple Reaction Timer",
       "description": "A simple reaction timer for me to learn/refresh the features of Vue 3. This project mainly displays my skills on event handling, where users can react at different intervals to get different results popped up on the screen.",
-      "route": "/reaction-timer",
+      "route": "/projects/reaction-timer",
       "redirect": false
     },
     {
       "id": "setbserbsesb4",
       "name": "File Reader",
       "description": "A page for users to import Excel or CSV files and display basic details in a data table",
-      "route": "/file-reader",
+      "route": "/projects/file-reader",
       "redirect": false
     },
     {
       "id": "rtbeterbgfbrtsb",
       "name": "Linear Motion Converter",
       "description": "A page for users to input 3 parameters for linear motion, and displays the rest of the parameters",
-      "route": "/physics/linearmotionconverter",
+      "route": "/projects/linearmotionconverter",
+      "redirect": false
+    },
+    {
+      "id": "zdbnsrthdrhthn",
+      "name": "Current Weather of a City",
+      "description": "A page for users to input a valid city name and displays the current weather details",
+      "route": "/projects/cityweather",
       "redirect": false
     }
   ]

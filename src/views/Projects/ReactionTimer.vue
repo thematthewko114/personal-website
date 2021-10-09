@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Block from '../components/Block.vue'
-import Result from '../components/Results.vue'
+import Block from '../.././components/Block.vue'
+import Result from '../.././components/Results.vue'
 export default {
   title: 'Reaction Timer',
   components: { Block, Result },
