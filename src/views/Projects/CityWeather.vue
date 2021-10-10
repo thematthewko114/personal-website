@@ -22,7 +22,7 @@
           <v-img v-if="data.weather[0].main == 'Clear'" src="../../assets/sunny.jpg" height="300" width="1200"></v-img>
           <v-img v-if="data.weather[0].main == 'Clouds'" src="../../assets/cloudy.jpg" height="300" width="1200"></v-img>
           <v-img v-if="data.weather[0].main == 'Rain'" src="../../assets/rainy.jpg" height="300" width="1200"></v-img>
-          <v-img v-if="data.weather[0].main == 'Snow'" src="../../assets/Snow.jpg" height="300" width="1200"></v-img>
+          <v-img v-if="data.weather[0].main == 'Snow'" src="../../assets/snowy.jpg" height="300" width="1200"></v-img>
           <v-card-title>City selected: {{data.name}}, {{data.sys.country}}</v-card-title>
           <v-card-title class="my-2">Weather</v-card-title>
           <v-card-subtitle>

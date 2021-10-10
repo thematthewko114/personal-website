@@ -7,9 +7,10 @@
         <div v-if="projects.length">
         <div v-for="project in projects" :key="project.id">
           <v-card class="my-2 card">
-            <v-card-title><b>{{project.name}}</b></v-card-title>
+            <v-card-title><b>Name: {{project.name}}</b></v-card-title>
             <v-container>
-              <p class="ma-4">{{project.description}}</p>
+              <p class="ma-4">Description: {{project.description}}</p>
+              <p class="ma-4">Tools used: {{project.tools}}</p>
               <v-btn v-if="project.redirect==true" class="ma-4" color="green" :href="project.route"><v-icon class="mr-2">mdi-arrow-right</v-icon>Visit Project</v-btn>
               <v-btn v-else class="ma-4" color="green" :to="project.route"><v-icon class="mr-2">mdi-arrow-right</v-icon>Visit Project</v-btn>
             </v-container>

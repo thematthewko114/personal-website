@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar flat class="primary">
+    <v-app-bar flat class="primary" fixed>
       <v-btn class="no-active" text to="/">
         <v-card-title>Matthew Ko</v-card-title>
       </v-btn>

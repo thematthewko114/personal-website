@@ -61,6 +61,11 @@ const routes = [
     component: () => import("../views/Projects/CityWeather.vue")
   },
   {
+    path: '/projects/f1live',
+    name: 'F1 Live',
+    component: () => import("../views/Projects/F1Live.vue")
+  },
+  {
     path: "*", //invalid path
     name: 'Error',
     component: () => import('../views/Error.vue')
@@ -70,6 +75,9 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes
 })
 

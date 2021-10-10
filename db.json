@@ -200,37 +200,50 @@
     {
       "id": "dflutbdrtrlhd",
       "name": "YouTeam - Team Management for YouTuber Groups",
-      "description": "A final-year project as a CS student at HKU SPACE. The website focuses on the usages of Vue.js, Firebase, Plotly.js, and YouTube Data API. Gained intermediate experience with authentication, NoSQL databases, state management, RESTful API, and web hosting.",
+      "description": "A final-year project as a CS student at HKU SPACE. Gained intermediate experience with authentication, NoSQL databases, state management, RESTful API, and web hosting.",
       "route": "https://fyp-website-3f6ab.web.app/login",
-      "redirect": true
+      "redirect": true,
+      "tools": "Firebase, Vuex, Plotly.js, YouTube Data API"
     },
     {
       "id": "haebuw3lrivae",
       "name": "Simple Reaction Timer",
       "description": "A simple reaction timer for me to learn/refresh the features of Vue 3. This project mainly displays my skills on event handling, where users can react at different intervals to get different results popped up on the screen.",
       "route": "/projects/reaction-timer",
-      "redirect": false
+      "redirect": false,
+      "tools": "Vue 3"
     },
     {
       "id": "setbserbsesb4",
       "name": "File Reader",
       "description": "A page for users to import Excel or CSV files and display basic details in a data table",
       "route": "/projects/file-reader",
-      "redirect": false
+      "redirect": false,
+      "tools": "NPM packages: readXlsxFile, PapaParse"
     },
     {
       "id": "rtbeterbgfbrtsb",
       "name": "Linear Motion Converter",
       "description": "A page for users to input 3 parameters for linear motion, and displays the rest of the parameters",
       "route": "/projects/linearmotionconverter",
-      "redirect": false
+      "redirect": false,
+      "tools": "Basic Vue Methods"
     },
     {
       "id": "zdbnsrthdrhthn",
       "name": "Current Weather of a City",
       "description": "A page for users to input a valid city name and displays the current weather details",
       "route": "/projects/cityweather",
-      "redirect": false
+      "redirect": false,
+      "tools": "openweathermap.org API"
+    },
+    {
+      "id": "fsgtnbsrftnbsrs",
+      "name": "F1 Live Standings and Results",
+      "description": "A page to display current Formula 1 standings",
+      "route": "/projects/f1live",
+      "redirect": false,
+      "tools": "Rapid API's F1 Live Motorsport Data API"
     }
   ]
 }
