@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar flat class="primary" fixed>
+    <v-app-bar flat class="primary">
       <v-btn class="no-active" text to="/">
         <v-card-title>Matthew Ko</v-card-title>
       </v-btn>
@@ -34,6 +34,13 @@ export default {
       ]
     }
   },
+  mounted(){
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
 }
 </script>
 <style>

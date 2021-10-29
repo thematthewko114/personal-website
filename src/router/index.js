@@ -66,6 +66,16 @@ const routes = [
     component: () => import("../views/Projects/F1Live.vue")
   },
   {
+    path: '/projects/apis',
+    name: 'Maps',
+    component: () => import("../views/Projects/Maps.vue")
+  },
+  {
+    path: '/projects/covid',
+    name: 'Covid',
+    component: () => import("../views/Projects/Covid.vue")
+  },
+  {
     path: "*", //invalid path
     name: 'Error',
     component: () => import('../views/Error.vue')

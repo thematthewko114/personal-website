@@ -244,6 +244,22 @@
       "route": "/projects/f1live",
       "redirect": false,
       "tools": "Rapid API's F1 Live Motorsport Data API"
+    },
+    {
+      "id": "sRVBrbzdbvfzdfbz",
+      "name": "API tester",
+      "description": "A page to test my APIS",
+      "route": "/projects/apis",
+      "redirect": false,
+      "tools": "Google Maps API"
+    },
+    {
+      "id": "srlibseiubudb",
+      "name": "COVID searcher",
+      "description": "A page to search for COVID cases for a country",
+      "route": "/projects/covid",
+      "redirect": false,
+      "tools": "COVID-19 data API"
     }
   ]
 }
