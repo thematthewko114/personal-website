@@ -11,6 +11,13 @@
           {{page.name}}
         </v-btn>
       </div>
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        color="#000000"
+        class="mx-4"
+        hide-details
+        label="Dark Theme"
+      ></v-switch>
     </v-app-bar>
     <v-main>
       <router-view></router-view>
@@ -22,6 +29,11 @@
 
 export default {
   name: 'App',
+  theme: vm => ({
+    initialDark: vm.$vuetify
+      ? vm.$vuetify.theme.dark
+      : false
+  }),
   data() {
     return {
       pages: [
@@ -43,16 +55,18 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
+  .theme--dark.v-application {
+    background-color: var(--v-background-base, #303030) !important;
+  }
+  .theme--light.v-application {
+    background-color: var(--v-background-base, #EEEEEE) !important;
+  }
   .title{
     font-size: 36px;
-    color: lightgray;
     font-family: Helvetica
   }
   .v-btn--active.no-active::before {
     opacity: 0 !important;
-  }
-  .card {
-    background-color: #494949
   }
 </style>
