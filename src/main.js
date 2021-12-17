@@ -8,7 +8,20 @@ import VuePapaParse from 'vue-papa-parse'
 import JsonCSV from 'vue-json-csv'
 import JsonExcel from 'vue-json-excel'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyA8zwDZ77P2uKcFhoTY2vF0rakMSR7s-hU",
+  authDomain: "personal-website-8a1cd.firebaseapp.com",
+  projectId: "personal-website-8a1cd",
+  storageBucket: "personal-website-8a1cd.appspot.com",
+  messagingSenderId: "27903663924",
+  appId: "1:27903663924:web:6017db12789c4cbbc18f61",
+  measurementId: "G-RDJCYRJXP1"
+}
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 Vue.config.productionTip = false
 Vue.mixin(titleMixin)
 Vue.use(VuePapaParse)
@@ -25,5 +38,6 @@ new Vue({
   router,
   store,
   vuetify,
+  database,
   render: function (h) { return h(App) }
 }).$mount('#app')

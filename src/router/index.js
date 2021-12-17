@@ -82,6 +82,21 @@ const routes = [
     component: () => import("../views/Projects/Covid.vue")
   },
   {
+    path: '/projects/revisionprogress',
+    name: 'Revision Progress Tracker',
+    component: () => import("../views/Projects/RevisionTracker/RevisionTrackerLogin.vue")
+  },
+  {
+    path: '/projects/revisionprogress/signup',
+    name: 'Sign Up for Revision Progress Tracker',
+    component: () => import("../views/Projects/RevisionTracker/RevisionTrackerSignup.vue")
+  },
+  {
+    path: '/projects/revisionprogress/dashboard',
+    name: 'Revision Progress Tracker Dashboard',
+    component: () => import("../views/Projects/RevisionTracker/RevisionTrackerDashboard.vue")
+  },
+  {
     path: "*", //invalid path
     name: 'Error',
     component: () => import('../views/Error.vue')

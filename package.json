@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "firebase": "^9.6.1",
     "read-excel-file": "^5.2.8",
     "vue": "^2.6.11",
     "vue-json-csv": "^1.2.12",

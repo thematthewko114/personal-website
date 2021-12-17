@@ -13,7 +13,7 @@
       </div>
       <v-switch
         v-model="$vuetify.theme.dark"
-        color="#000000"
+        color="green"
         class="mx-4"
         hide-details
         label="Dark Theme"
