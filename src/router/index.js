@@ -66,6 +66,12 @@ const routes = [
     component: () => import("../views/Projects/F1Live.vue")
   },
   {
+    path: '/projects/f1live/:id',
+    name: 'F1 Race',
+    component: () => import("../views/Projects/F1LiveStat.vue"),
+    props: true
+  },
+  {
     path: '/projects/apis',
     name: 'Maps',
     component: () => import("../views/Projects/Maps.vue")

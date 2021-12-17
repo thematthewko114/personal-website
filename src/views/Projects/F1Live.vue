@@ -4,7 +4,7 @@
       <v-card class="card my-2">
         <v-card-title style="font-size:30px">F1 Statistics</v-card-title>
       </v-card>
-      <v-card v-if="standings!=null" class="card my-2">
+      <v-card v-if="races!=null" class="card my-2">
         <v-tabs
           v-model="tab"
           grows
@@ -38,25 +38,23 @@
             >
             </v-data-table>
           </v-tab-item>
-          <!--<v-tab-item :value="`tab-3`">
+          <v-tab-item :value="`tab-3`">
             <v-card-title>Races</v-card-title>
-              <v-expansion-panels>
-                <v-expansion-panel
-                  v-for="(race, i) in races"
-                  :key="i"
-                >
-                  <v-expansion-panel-header>{{race.name}}</v-expansion-panel-header>
-                    <v-expansion-panel-content>
-                    <v-data-table
-                      :loading="loading"
-                      :items="race.results.drivers"
-                      :headers="racesHeaders"
-                    >
-                    </v-data-table>
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-          </v-tab-item>-->
+            <v-data-table
+              :loading="loading"
+              :items="races"
+              :headers="raceHeaders"
+            >
+              <template v-slot:item.status="{item}">
+                  <v-icon left v-if="item.status=='Complete'" color="green" class="mx-4">mdi-check-bold</v-icon>
+                  <v-icon left v-if="item.status=='Cancelled'" color="red" class="mx-4">mdi-close-box</v-icon>
+                  <v-icon left v-if="item.status=='Postponed'" color="yellow" class="mx-4">mdi-alert-rhombus</v-icon>
+              </template>
+              <template v-slot:item.details="{item}">
+                <v-btn icon :to='"/projects/f1live/" + item.id' v-if="item.status=='Complete'"><v-icon>mdi-arrow-right-bold</v-icon></v-btn>
+              </template>
+            </v-data-table>
+          </v-tab-item>
         </v-tabs-items>
       </v-card>
     </v-container>
@@ -74,16 +72,13 @@ export default {
         {text: 'Team Name', value: "team_name"},
         {text: 'Points', value: "points"},
       ],
-      races: null,
-      racesHeaders: [
-        {text: 'Position', value: "position"},
+      raceHeaders: [
+        {text: 'Completion', value: "status"},
         {text: 'Name', value: "name"},
-        {text: 'Team', value: "team_name"},
-        {text: 'Nationality', value: "nationality"},
-        {text: 'Interval', value: 'interval'},
-        {text: 'Stops', value: 'stops'},
-        {text: 'Gap', value: "interval"},
+        {text: 'Date', value: "date"},
+        {text: 'Details', value: "details"},
       ],
+      races: null,
       standings: null,
       standingHeaders: [
         {text: 'Position', value: "position"},
@@ -97,7 +92,6 @@ export default {
   },
   mounted() {
     this.loading = true
-    let me = this
     fetch("https://f1-live-motorsport-data.p.rapidapi.com/drivers/standings/2021", {
       "method": "GET",
       "headers": {
@@ -135,32 +129,20 @@ export default {
     })
     .then(response => response.json())
     .then(data => {
-      let sessions = []
+      this.races = []
       for(let i in data.results){
         for(let j in data.results[i].sessions){
-          if(data.results[i].sessions[j].session_name == "Race" && data.results[i].status == "Complete"){
-            sessions.push(data.results[i].sessions[j].id)
+          if(data.results[i].sessions[j].session_name == "Race"){
+            this.races.push({
+              name: data.results[i].name,
+              date: data.results[i].end_date,
+              status: data.results[i].status,
+              id: data.results[i].sessions[j].id
+            })
+            break
           }
         }
       }
-      let races = []
-      for(let k in sessions){
-        fetch(`https://f1-live-motorsport-data.p.rapidapi.com/session/${sessions[k]}`, {
-          "method": "GET",
-          "headers": {
-            "x-rapidapi-host": "f1-live-motorsport-data.p.rapidapi.com",
-            "x-rapidapi-key": "68d5b8df1bmsh086fee4794fdd89p15cb42jsn00cf4832d55f"
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          races.push(data.results)
-        })
-        .catch(err => {
-          console.error(err);
-        });
-      }
-      me.races = races
       this.loading = false
     })
     .catch(err => {
