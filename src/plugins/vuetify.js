@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
-import colors from 'vuetify/lib/util/colors'
 
 Vue.use(Vuetify);
 
@@ -20,8 +19,8 @@ export default new Vuetify({
       },
       dark:{
         primary: '#3f00ff',
-        card: '#404040',
-        background: colors.indigo.base
+        card: '#505050',
+        background: '#303030'
       }
     }
   }

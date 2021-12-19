@@ -4,7 +4,7 @@
       <v-card class="card">
         <v-card-title style="font-size:30px">Awards and Certificates</v-card-title>
       </v-card>
-      <div v-if="awards.length">
+      <div v-if="awards">
         <div v-for="award in awards" :key="award.id">
           <v-card class="my-2 card">
             <v-card-title><b>{{award.name}}</b></v-card-title>
@@ -22,16 +22,10 @@
 <script>
 export default {
   title: 'Awards',
-  data() {
-    return {
-      awards: []
+  computed:{
+    awards(){
+      return this.$store.getters.awards
     }
-  },
-  mounted(){
-    fetch('http://localhost:3000/awards')
-      .then(res => res.json())
-      .then(data => this.awards = data)
-      .catch(error => console.log(error.message))
   }
 }
 </script>

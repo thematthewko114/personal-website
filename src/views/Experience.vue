@@ -4,7 +4,7 @@
       <v-card class="card">
         <v-card-title style="font-size:30px">Experiences</v-card-title>
       </v-card>
-        <div v-if="experiences.length">
+        <div v-if="experiences">
           <div v-for="experience in experiences" :key="experience.id">
             <v-card class="my-2 card">
               <v-card-title><b>{{experience.company}} - {{experience.name}}</b></v-card-title>
@@ -24,16 +24,10 @@
 <script>
 export default {
   title: 'Experiences',
-  data() {
-    return {
-      experiences: []
+  computed: {
+    experiences(){
+      return this.$store.getters.experiences
     }
-  },
-  mounted(){
-    fetch('http://localhost:3000/experiences')
-      .then(res => res.json())
-      .then(data => this.experiences = data)
-      .catch(error => console.log(error.message))
   }
 }
 </script>

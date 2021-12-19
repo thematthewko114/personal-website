@@ -28,7 +28,6 @@ export default {
         username: this.email,
         password: this.password
       })
-      this.$router.push('/projects/revisionprogress/dashboard')
     }
   },
   computed:{

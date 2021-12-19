@@ -4,10 +4,10 @@
       <v-card class="card">
         <v-card-title style="font-size:30px">Projects</v-card-title>
       </v-card>
-        <div v-if="projects.length">
+        <div v-if="projects">
         <div v-for="project in projects" :key="project.id">
           <v-card class="my-2 card">
-            <v-card-title><b>Name: {{project.name}}</b></v-card-title>
+            <v-card-title><strong>Name: {{project.name}}</strong></v-card-title>
             <v-container>
               <p class="ma-4">Description: {{project.description}}</p>
               <p class="ma-4">Tools used: {{project.tools}}</p>
@@ -19,21 +19,15 @@
       </div>
     </v-container>
   </v-app>
-</template>.
+</template>
 
 <script>
 export default {
   title: 'Projects',
-  data() {
-    return {
-      projects: []
+  computed: {
+    projects(){
+      return this.$store.getters.projects
     }
-  },
-  mounted(){
-    fetch('http://localhost:3000/projects')
-      .then(res => res.json())
-      .then(data => this.projects = data)
-      .catch(error => console.log(error.message))
   }
 }
 </script>

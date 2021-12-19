@@ -8,7 +8,7 @@
         
       <v-card class="card">
         <v-container>
-          <v-card-title v-if="home.length">{{home[0].text}}</v-card-title>
+          <v-card-title v-if="home">{{home[0].text}}</v-card-title>
         </v-container>
       </v-card>
     </v-container>
@@ -19,16 +19,10 @@
 
 export default {
   title: 'Home',
-  data() {
-    return {
-      home: []
+  computed:{
+    home(){
+      return this.$store.getters.homepage
     }
-  },
-  mounted(){
-    fetch('http://localhost:3000/homepage')
-      .then(res => res.json())
-      .then(data => this.home = data)
-      .catch(error => console.log(error.message))
   }
 };
 </script>

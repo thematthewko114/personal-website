@@ -6,9 +6,9 @@
       </v-card>
       <v-card class="card">
         <v-card-title><b>About Me</b></v-card-title>
-        <p v-if="introduction.length" class="pa-4">{{introduction[0].text}}</p>
+        <p v-if="introduction" class="pa-4">{{introduction[0].text}}</p>
       </v-card>
-      <div v-if="interests.length">
+      <div v-if="interests">
         <v-card class="my-2 card">
           <v-card-title><b>My Interests</b></v-card-title>
           <div v-for="interest in interests" :key="interest.id">
@@ -38,26 +38,16 @@
 <script>
 export default {
   title: 'Profile',
-  data() {
-    return {
-      interests: [],
-      introduction: [],
-      education: []
+  computed: {
+    interests(){
+      return this.$store.getters.interests
+    },
+    introduction(){
+      return this.$store.getters.introduction
+    },
+    education(){
+      return this.$store.getters.education
     }
-  },
-  mounted(){
-    fetch('http://localhost:3000/interests')
-      .then(res => res.json())
-      .then(data => this.interests = data)
-      .catch(error => console.log(error.message))
-    fetch('http://localhost:3000/introduction')
-      .then(res => res.json())
-      .then(data => this.introduction = data)
-      .catch(error => console.log(error.message))
-    fetch('http://localhost:3000/education')
-      .then(res => res.json())
-      .then(data => this.education = data)
-      .catch(error => console.log(error.message))
   }
 }
 </script>

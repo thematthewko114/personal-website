@@ -34,10 +34,21 @@ Vue.use(VueGoogleMaps, {
     installComponents: true
   },
 }),
+
 new Vue({
   router,
   store,
   vuetify,
   database,
-  render: function (h) { return h(App) }
+  render: function (h) { return h(App) },
+  created(){
+    this.$store.dispatch('getAwards')
+    this.$store.dispatch('getEducation')
+    this.$store.dispatch('getExperiences')
+    this.$store.dispatch('getHomepage')
+    this.$store.dispatch('getInterests')
+    this.$store.dispatch('getIntroduction')
+    this.$store.dispatch('getLearnings')
+    this.$store.dispatch('getProjects')
+  }
 }).$mount('#app')
