@@ -1,17 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getDatabase, ref, child, get } from "firebase/database";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, child, get, set } from "firebase/database";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     loading: false,
-    user: null,
     awards: null,
     education: null,
     experiences: null,
+    events: [],
     homepage: null,
     interests: null,
     introduction: null,
@@ -19,11 +18,14 @@ export default new Vuex.Store({
     projects: null
   },
   mutations: {
+    addEvent(state, payload){
+      state.events.push(payload)
+    },
+    setEvents (state, payload) {
+      state.events = payload
+    },
     setLoading (state, payload) {
       state.loading = payload
-    },
-    setUser(state, payload){
-      state.user = payload
     },
     setAwards(state, payload){
       state.awards = payload
@@ -51,6 +53,18 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    addEvent({commit, state}, payload){
+      commit("setLoading", true)
+      commit('addEvent', payload.new)
+      set(ref(getDatabase(), 'events/'), state.events)
+      .then(() => {
+        commit("setLoading", false)
+      })
+      .catch((error)=> {
+        console.log(error)
+        commit("setLoading", false)
+      })
+    },
     getAwards({commit}){
       const dbRef = ref(getDatabase());
       get(child(dbRef, "awards/")).then((snapshot) => {
@@ -155,46 +169,23 @@ export default new Vuex.Store({
         console.error(error);
       });
     },
-    logUserIn({commit}, payload){
-      commit('setLoading', true)
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, payload.username, payload.password)
-        .then((userCredential) => {
-          let user = userCredential.user;
-          commit('setUser', {username: user.email, id: user.uid})
-          commit('setLoading', false)
-        })
-        .catch((error) => {
-          commit('setLoading', false)
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode + ": " + errorMessage)
-        })
+    getEvents({commit}){
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, "events/")).then((snapshot) => {
+        if (snapshot.exists()) {
+          let events = snapshot.val()
+          commit('setEvents', events)
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
     },
-    
-    signUserUp({commit}, payload){
-      commit('setLoading', true)
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, payload.username, payload.password)
-        .then((userCredential) => {
-          let user = userCredential.user;
-          commit('setUser', {username: user.email, id: user.uid})
-          commit('setLoading', false)
-        })
-        .catch((error) => {
-          commit('setLoading', false)
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode + ": " + errorMessage)
-        });
-    }
   },
   modules: {
   },
   getters:{
-    user(state){
-      return state.user
-    },
     awards(state){
       return state.awards
     },
@@ -203,6 +194,9 @@ export default new Vuex.Store({
     },
     experiences(state){
       return state.experiences
+    },
+    events(state){
+      return state.events
     },
     homepage(state){
       return state.homepage

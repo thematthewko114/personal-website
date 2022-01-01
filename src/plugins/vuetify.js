@@ -18,7 +18,7 @@ export default new Vuetify({
         background: '#FFFFFF'
       },
       dark:{
-        primary: '#3f00ff',
+        primary: '#bf006f',
         card: '#505050',
         background: '#303030'
       }

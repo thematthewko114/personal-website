@@ -10,6 +10,9 @@ import JsonExcel from 'vue-json-excel'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
+import VueClock from '@dangvanthanh/vue-clock';
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8zwDZ77P2uKcFhoTY2vF0rakMSR7s-hU",
@@ -34,6 +37,7 @@ Vue.use(VueGoogleMaps, {
     installComponents: true
   },
 }),
+Vue.use(VueClock);
 
 new Vue({
   router,
@@ -50,5 +54,6 @@ new Vue({
     this.$store.dispatch('getIntroduction')
     this.$store.dispatch('getLearnings')
     this.$store.dispatch('getProjects')
+    this.$store.dispatch('getEvents')
   }
 }).$mount('#app')
