@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getDatabase, ref, child, get, set } from "firebase/database";
+import { getDatabase, ref, child, get, set, remove } from "firebase/database";
 
 Vue.use(Vuex)
 
@@ -53,10 +53,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    addEvent({commit, state}, payload){
+    addEvent({commit}, payload){
       commit("setLoading", true)
       commit('addEvent', payload.new)
-      set(ref(getDatabase(), 'events/'), state.events)
+      set(ref(getDatabase(), 'events/' + payload.new.id), payload.new)
       .then(() => {
         commit("setLoading", false)
       })
@@ -174,7 +174,11 @@ export default new Vuex.Store({
       get(child(dbRef, "events/")).then((snapshot) => {
         if (snapshot.exists()) {
           let events = snapshot.val()
-          commit('setEvents', events)
+          let eventArray = []
+          for(let i in events){
+            eventArray.push(events[i])
+          }
+          commit('setEvents', eventArray)
         } else {
           console.log("No data available");
         }
@@ -182,6 +186,16 @@ export default new Vuex.Store({
         console.error(error);
       });
     },
+    deleteEvent({commit, state}, payload){
+      commit("setLoading", true)
+      for(let i in state.events){
+        if(state.events[i].id == payload){
+          state.events.splice(i, 1)
+        }
+      }
+      remove(ref(getDatabase(), 'events/' + payload))
+      commit("setLoading", false)
+    }
   },
   modules: {
   },
