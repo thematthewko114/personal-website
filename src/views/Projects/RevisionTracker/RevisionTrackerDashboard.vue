@@ -92,14 +92,11 @@
               :color="selectedEvent.color"
               dark
             >
-              <v-btn icon>
+              <v-btn icon @click="openEditDialog(selectedEvent)">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
               <v-btn icon @click="deleteEvent(selectedEvent.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
@@ -128,7 +125,7 @@
         </div>
         <v-card-title>And your progress looks like:</v-card-title>
         <v-expansion-panels>
-          <v-expansion-panel v-for="event in todayEvents" :key="event.id">
+          <v-expansion-panel v-for="event in todayEvents" :key="event.id" class="card">
             <v-expansion-panel-header v-if="event.color=='red'">
               <v-icon left color="red">mdi-progress-alert</v-icon>
               <v-card-text>{{event.name}}</v-card-text>
@@ -188,6 +185,45 @@
         </v-container>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="editDialog" width="1000px">
+      <v-card class="card">
+        <v-container>
+          <v-card-title><strong>Edit Subject</strong></v-card-title>
+          <v-divider></v-divider>
+          <v-form>
+            <v-text-field 
+              v-model="editObj.title" 
+              label="Event title" 
+              class="ma-4"
+              required
+            ></v-text-field>
+            <v-card-title>Pick a date</v-card-title>
+            <v-date-picker
+              v-model="editObj.date"
+              class="ma-4"
+            ></v-date-picker>
+            <v-card-title>Pick start time</v-card-title>
+            <v-time-picker
+              v-model="editObj.startingTime"
+              class="ma-4"
+            ></v-time-picker>
+            <v-card-title>Pick end time</v-card-title>
+            <v-time-picker
+              v-model="editObj.endTime"
+              class="ma-4"
+            ></v-time-picker>
+            <v-textarea
+              v-model="editObj.content" 
+              label="Notes"
+              class="ma-4"
+            ></v-textarea>
+            <v-select class="ma-4" label="Select your current progress" :items="['Incomplete', 'In Progress', 'Complete']" v-model="editObj.color"></v-select>
+            <v-btn color="green" @click="editEvent(editObj)" class="mx-2" :disabled="editObj.date == null || editObj.startingTime == null || editObj.endTime == null || editObj.title==''">Submit</v-btn>
+            <v-btn @click="editDialog=false" class="mx-2">Close</v-btn>
+          </v-form>
+        </v-container>
+      </v-card>
+    </v-dialog>
     <v-snackbar
       v-model="snackbar"
       timeout=5000
@@ -209,6 +245,7 @@ export default {
     return {
       show1: false,
       addDialog: false,
+      editDialog: false,
       title: '',
       content: '',
       date: null,
@@ -229,6 +266,15 @@ export default {
       selectedElement: null,
       selectedOpen: false,
       snackbar: false,
+      editObj: {
+        id: null,
+        title: '',
+        content: '',
+        date: null,
+        startingTime: null,
+        endTime: null,
+        color: null
+      }
     }
   },
   methods: {
@@ -240,7 +286,8 @@ export default {
     },
     logout(){
       this.$store.dispatch('logout')
-      this.$router.push('/projects/revisionprogress')
+      this.$store.dispatch('getUsers')
+      this.$router.push('/projects/revisionprogress/login')
     },
     addEvent(){
       let obj = {
@@ -255,6 +302,40 @@ export default {
       this.title = this.content = ''
       this.date = this.startingTime = this.endTime = null
       this.addDialog = false
+    },
+    openEditDialog(event){
+      this.editObj.id = event.id
+      this.editObj.title = event.name
+      this.editObj.startingTime = event.start.split(" ")[1]
+      this.editObj.endTime = event.end.split(" ")[1]
+      this.editObj.date = event.start.split(" ")[0]
+      this.editObj.content = event.content
+      this.editObj.color = "Incomplete"
+      this.editDialog = true
+    },
+    editEvent(object){
+      let obj = {
+        id: object.id,
+        name: this.editObj.title, 
+        start: this.editObj.date + ' ' + this.editObj.startingTime, 
+        end: this.editObj.date + ' ' + this.editObj.endTime, 
+        content: this.editObj.content,
+        color: null
+      }
+      if(object.color == "Incomplete"){
+        obj.color = "red"
+      }
+      else if(object.color == "In Progress"){
+        obj.color = "orange"
+      }
+      else{
+        obj.color = "green"
+      }
+      this.$store.dispatch('editEvent', obj)
+      this.$store.dispatch('getEvents')
+      this.title = this.content = ''
+      this.date = this.startingTime = this.endTime = null
+      this.editDialog = false
     },
     showEvent ({ nativeEvent, event }) {
       const open = () => {

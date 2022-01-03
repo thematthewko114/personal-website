@@ -15,7 +15,8 @@ export default new Vuex.Store({
     interests: null,
     introduction: null,
     learnings: null,
-    projects: null
+    projects: null,
+    users: null
   },
   mutations: {
     addEvent(state, payload){
@@ -51,6 +52,12 @@ export default new Vuex.Store({
     setProjects(state, payload){
       state.projects = payload
     },
+    login(state, payload){
+      state.users = payload
+    },
+    logout(state){
+      state.users = null
+    }
   },
   actions: {
     addEvent({commit}, payload){
@@ -186,6 +193,16 @@ export default new Vuex.Store({
         console.error(error);
       });
     },
+    getUsers({commit}){
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, "users/")).then((snapshot) => {
+        if (snapshot.exists()) {
+          commit('login', snapshot.val())
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+    },
     deleteEvent({commit, state}, payload){
       commit("setLoading", true)
       for(let i in state.events){
@@ -195,6 +212,48 @@ export default new Vuex.Store({
       }
       remove(ref(getDatabase(), 'events/' + payload))
       commit("setLoading", false)
+    },
+    editEvent({commit, state}, payload){
+      commit('setLoading', true)
+      for(let i in state.events){
+        if(state.events[i].id == payload.id){
+          state.events[i] = payload
+          break
+        }
+      }
+      set(ref(getDatabase(), 'events/' + payload.id), payload)
+      .then(() => {
+        commit("setLoading", false)
+      })
+      .catch((error)=> {
+        console.log(error)
+        commit("setLoading", false)
+      })
+    },
+    login({commit}){
+      set(ref(getDatabase(), 'users/'), "sebrgiuserb")
+      .then(() => {
+        commit('login')
+        commit("setLoading", false)
+      })
+      .catch((error)=> {
+        console.log(error)
+        commit("setLoading", false)
+      })
+    },
+    logout({commit}){
+      set(ref(getDatabase(), 'users/'), null)
+      .then(() => {
+        commit('logout')
+        commit("setLoading", false)
+      })
+      .catch((error)=> {
+        console.log(error)
+        commit("setLoading", false)
+      })
+    },
+    autoLogin({commit}){
+      commit('login')
     }
   },
   modules: {
@@ -226,6 +285,9 @@ export default new Vuex.Store({
     },
     projects(state){
       return state.projects
+    },
+    users(state){
+      return state.users
     }
   }
 })

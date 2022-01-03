@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-//import RouteGuard from '../router/routeGuard.js'
+import RouteGuard from '../router/routeGuard.js'
 
 Vue.use(VueRouter)
 
@@ -86,7 +86,12 @@ const routes = [
     path: '/projects/revisionprogress/dashboard',
     name: 'Revision Progress Tracker Dashboard',
     component: () => import("../views/Projects/RevisionTracker/RevisionTrackerDashboard.vue"),
-    //beforeEnter: RouteGuard
+    beforeEnter: RouteGuard
+  },
+  {
+    path: '/projects/revisionprogress/login',
+    name: 'Revision Progress Tracker Login',
+    component: () => import("../views/Projects/RevisionTracker/Login.vue")
   },
   {
     path: "*", //invalid path

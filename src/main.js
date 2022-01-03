@@ -55,5 +55,6 @@ new Vue({
     this.$store.dispatch('getLearnings')
     this.$store.dispatch('getProjects')
     this.$store.dispatch('getEvents')
+    this.$store.dispatch('getUsers')
   }
 }).$mount('#app')
