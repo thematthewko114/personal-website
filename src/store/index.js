@@ -269,7 +269,7 @@ export default new Vuex.Store({
       return state.experiences
     },
     events(state){
-      return state.events
+      return state.events.sort((a, b) => a.end < b.end ? - 1 : Number(a.end > b.end))
     },
     homepage(state){
       return state.homepage

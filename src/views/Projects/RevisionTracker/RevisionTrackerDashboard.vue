@@ -141,6 +141,7 @@
             <v-expansion-panel-content>
               <v-card-text>Period: {{event.start}} - {{event.end}}</v-card-text>
               <v-card-text>Notes: {{event.content}}</v-card-text>
+              <v-btn color="grey" @click="openEditDialog(event)" class="ma-4">Edit</v-btn>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
