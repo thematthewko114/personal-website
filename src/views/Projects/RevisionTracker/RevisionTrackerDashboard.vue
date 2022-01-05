@@ -97,7 +97,7 @@
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn icon @click="deleteEvent(selectedEvent.id)">
+              <v-btn icon @click="deleteEvent(user, selectedEvent.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
             </v-toolbar>
@@ -146,7 +146,6 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
-        
       </v-card>
     </v-container>
     <v-dialog v-model="addDialog" width="1000px">
@@ -164,14 +163,14 @@
             <v-card-title v-if="single_day">Pick event date</v-card-title>
             <v-card-title v-if="!single_day">Pick start date</v-card-title>
             <v-date-picker
-              v-model="editObj.date1"
+              v-model="date1"
               class="ma-4"
             ></v-date-picker>
             <v-checkbox class="ma-4" v-model="single_day" label="Single-day event"></v-checkbox>
             <v-card-title v-if="!single_day">Pick end date</v-card-title>
             <v-date-picker
               v-if="!single_day"
-              v-model="editObj.date2"
+              v-model="date2"
               class="ma-4"
             ></v-date-picker>
             <v-card-title>Pick start time</v-card-title>
@@ -380,8 +379,8 @@ export default {
 
       nativeEvent.stopPropagation()
     },
-    deleteEvent(id){
-      this.$store.dispatch('deleteEvent', id)
+    deleteEvent(userId, id){
+      this.$store.dispatch('deleteEvent', {userId: userId, eventId: id})
       this.snackbar = true
       this.selectedOpen = false
     },

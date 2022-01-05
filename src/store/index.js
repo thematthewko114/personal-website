@@ -210,11 +210,11 @@ export default new Vuex.Store({
     deleteEvent({commit, state}, payload){
       commit("setLoading", true)
       for(let i in state.events){
-        if(state.events[i].id == payload){
+        if(state.events[i].id == payload.eventId){
           state.events.splice(i, 1)
         }
       }
-      remove(ref(getDatabase(), 'events/' + payload))
+      remove(ref(getDatabase(), 'events/' + payload.userId + '/' + payload.eventId))
       commit("setLoading", false)
     },
     editEvent({commit, state}, payload){
