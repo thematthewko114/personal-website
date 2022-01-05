@@ -11,6 +11,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import VueClock from '@dangvanthanh/vue-clock';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 
@@ -54,7 +55,11 @@ new Vue({
     this.$store.dispatch('getIntroduction')
     this.$store.dispatch('getLearnings')
     this.$store.dispatch('getProjects')
-    this.$store.dispatch('getEvents')
-    this.$store.dispatch('getUsers')
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if(user!=null){
+        this.$store.dispatch("autoLogin", user.uid)
+      }
+    })
   }
 }).$mount('#app')

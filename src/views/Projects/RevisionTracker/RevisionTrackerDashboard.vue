@@ -36,7 +36,7 @@
             outlined
             hide-details
             class="ma-2"
-            label="type"
+            label="Display Scale"
           ></v-select>
           <v-select
             v-model="mode"
@@ -44,7 +44,7 @@
             dense
             outlined
             hide-details
-            label="event-overlap-mode"
+            label="Event Overlap Mode"
             class="ma-2"
           ></v-select>
           <v-select
@@ -53,7 +53,7 @@
             dense
             outlined
             hide-details
-            label="weekdays"
+            label="Calendar Format"
             class="ma-2"
           ></v-select>
           <v-spacer></v-spacer>
@@ -124,6 +124,7 @@
           <vue-clock class="ml-4"/>
         </div>
         <v-card-title>And your progress looks like:</v-card-title>
+        <v-card-text v-if="todayEvents==[]">No tasks for today!</v-card-text>
         <v-expansion-panels>
           <v-expansion-panel v-for="event in todayEvents" :key="event.id" class="card">
             <v-expansion-panel-header v-if="event.color=='red'">
@@ -160,9 +161,17 @@
               class="ma-4"
               required
             ></v-text-field>
-            <v-card-title>Pick a date</v-card-title>
+            <v-card-title v-if="single_day">Pick event date</v-card-title>
+            <v-card-title v-if="!single_day">Pick start date</v-card-title>
             <v-date-picker
-              v-model="date"
+              v-model="editObj.date1"
+              class="ma-4"
+            ></v-date-picker>
+            <v-checkbox class="ma-4" v-model="single_day" label="Single-day event"></v-checkbox>
+            <v-card-title v-if="!single_day">Pick end date</v-card-title>
+            <v-date-picker
+              v-if="!single_day"
+              v-model="editObj.date2"
               class="ma-4"
             ></v-date-picker>
             <v-card-title>Pick start time</v-card-title>
@@ -180,7 +189,7 @@
               label="Notes"
               class="ma-4"
             ></v-textarea>
-            <v-btn color="green" @click="addEvent" class="mx-2" :disabled="date == null || startingTime == null || endTime == null || title==''">Submit</v-btn>
+            <v-btn color="green" @click="addEvent" class="mx-2" :disabled="date1 == null || startingTime == null || endTime == null || title==''">Submit</v-btn>
             <v-btn @click="addDialog=false" class="mx-2">Close</v-btn>
           </v-form>
         </v-container>
@@ -198,9 +207,17 @@
               class="ma-4"
               required
             ></v-text-field>
-            <v-card-title>Pick a date</v-card-title>
+            <v-card-title v-if="single_day">Pick event date</v-card-title>
+            <v-card-title v-if="!single_day">Pick start date</v-card-title>
             <v-date-picker
-              v-model="editObj.date"
+              v-model="editObj.date1"
+              class="ma-4"
+            ></v-date-picker>
+            <v-checkbox class="ma-4" v-model="single_day" label="Single-day event"></v-checkbox>
+            <v-card-title v-if="!single_day">Pick end date</v-card-title>
+            <v-date-picker
+              v-if="!single_day"
+              v-model="editObj.date2"
               class="ma-4"
             ></v-date-picker>
             <v-card-title>Pick start time</v-card-title>
@@ -219,7 +236,7 @@
               class="ma-4"
             ></v-textarea>
             <v-select class="ma-4" label="Select your current progress" :items="['Incomplete', 'In Progress', 'Complete']" v-model="editObj.color"></v-select>
-            <v-btn color="green" @click="editEvent(editObj)" class="mx-2" :disabled="editObj.date == null || editObj.startingTime == null || editObj.endTime == null || editObj.title==''">Submit</v-btn>
+            <v-btn color="green" @click="editEvent(user, editObj)" class="mx-2" :disabled="editObj.date1 == null || editObj.startingTime == null || editObj.endTime == null || editObj.title==''">Submit</v-btn>
             <v-btn @click="editDialog=false" class="mx-2">Close</v-btn>
           </v-form>
         </v-container>
@@ -249,7 +266,8 @@ export default {
       editDialog: false,
       title: '',
       content: '',
-      date: null,
+      date1: null,
+      date2: null,
       startingTime: null,
       endTime: null,
       type: 'month',
@@ -267,11 +285,13 @@ export default {
       selectedElement: null,
       selectedOpen: false,
       snackbar: false,
+      single_day: true,
       editObj: {
         id: null,
         title: '',
         content: '',
-        date: null,
+        date1: null,
+        date2: null,
         startingTime: null,
         endTime: null,
         color: null
@@ -287,21 +307,23 @@ export default {
     },
     logout(){
       this.$store.dispatch('logout')
-      this.$store.dispatch('getUsers')
       this.$router.push('/projects/revisionprogress/login')
     },
     addEvent(){
+      if(this.single_day){
+        this.date2 = this.date1
+      }
       let obj = {
         id: this.makeid(20),
         name: this.title, 
-        start: this.date + ' ' + this.startingTime, 
-        end: this.date + ' ' + this.endTime, 
+        start: this.date1 + ' ' + this.startingTime, 
+        end: this.date2 + ' ' + this.endTime, 
         content: this.content,
         color: "red"
       }
-      this.$store.dispatch('addEvent', {old: this.events, new: obj})
+      this.$store.dispatch('addEvent', {old: this.events, new: obj, userId: this.user})
       this.title = this.content = ''
-      this.date = this.startingTime = this.endTime = null
+      this.date1 = this.date2 = this.startingTime = this.endTime = null
       this.addDialog = false
     },
     openEditDialog(event){
@@ -309,17 +331,21 @@ export default {
       this.editObj.title = event.name
       this.editObj.startingTime = event.start.split(" ")[1]
       this.editObj.endTime = event.end.split(" ")[1]
-      this.editObj.date = event.start.split(" ")[0]
+      this.editObj.date1 = event.start.split(" ")[0]
+      this.editObj.date2 = event.end.split(" ")[0]
       this.editObj.content = event.content
       this.editObj.color = "Incomplete"
       this.editDialog = true
     },
-    editEvent(object){
+    editEvent(id, object){
+      if(this.single_day){
+        this.editObj.date2 = this.editObj.date1
+      }
       let obj = {
         id: object.id,
         name: this.editObj.title, 
-        start: this.editObj.date + ' ' + this.editObj.startingTime, 
-        end: this.editObj.date + ' ' + this.editObj.endTime, 
+        start: this.editObj.date1 + ' ' + this.editObj.startingTime, 
+        end: this.editObj.date2 + ' ' + this.editObj.endTime, 
         content: this.editObj.content,
         color: null
       }
@@ -332,10 +358,10 @@ export default {
       else{
         obj.color = "green"
       }
-      this.$store.dispatch('editEvent', obj)
-      this.$store.dispatch('getEvents')
+      this.$store.dispatch('editEvent', {userId: id, event: obj})
+      this.$store.dispatch('getEvents', this.user)
       this.title = this.content = ''
-      this.date = this.startingTime = this.endTime = null
+      this.date1 = this.date2 = this.startingTime = this.endTime = null
       this.editDialog = false
     },
     showEvent ({ nativeEvent, event }) {
@@ -389,8 +415,14 @@ export default {
         }
       }
       return array
+    },
+    user(){
+      return this.$store.getters.user
     }
   },
+  mounted(){
+    this.$store.dispatch("getEvents", this.user)
+  }
 }
 </script>
 

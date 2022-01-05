@@ -94,6 +94,11 @@ const routes = [
     component: () => import("../views/Projects/RevisionTracker/Login.vue")
   },
   {
+    path: '/projects/revisionprogress/signup',
+    name: 'Revision Progress Tracker Signup',
+    component: () => import("../views/Projects/RevisionTracker/Signup.vue")
+  },
+  {
     path: "*", //invalid path
     name: 'Error',
     component: () => import('../views/Error.vue')

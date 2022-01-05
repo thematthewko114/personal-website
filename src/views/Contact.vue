@@ -22,8 +22,8 @@ export default {
   data() {
     return {
       contacts: [
-        {icon: 'mdi-instagram', target: 'https://www.instagram.com/thematthewko114/', text: 'Instagram: thematthewko114'},
-        {icon: 'mdi-facebook', target: 'https://www.facebook.com/profile.php?id=100007935941212', text: 'Facebook: Matthew Ko(Matt)'},
+        {icon: 'mdi-instagram', target: 'https://www.instagram.com/thematthewko114/', text: 'Instagram: thematthewko114 (dormant)'},
+        {icon: 'mdi-facebook', target: 'https://www.facebook.com/profile.php?id=100007935941212', text: 'Facebook: Matthew Ko(Matt) (dormant)'},
         {icon: 'mdi-linkedin', target: 'https://www.linkedin.com/in/thematthewko114/', text: 'LinkedIn: Matthew Ko'},
         {icon: 'mdi-whatsapp', text: 'Phone / WhatsApp / Signal: (+852 9166 3826)'}
       ]
