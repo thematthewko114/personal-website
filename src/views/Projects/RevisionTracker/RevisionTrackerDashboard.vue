@@ -409,8 +409,8 @@ export default {
       let array = []
       let events = JSON.parse(JSON.stringify(this.events))
       for(let i in this.events){
-        if(events[i].start.includes(date) || events[i].end.includes(date)){
-          array.push(this.events[i])
+        if((events[i].start.includes(date) || events[i].end.includes(date)) || (events[i].start.split(" ")[0]<=date && events[i].end.split(" ")[0]>=date)){
+          array.push(events[i])
         }
       }
       return array
