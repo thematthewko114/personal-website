@@ -30,6 +30,16 @@
             </v-container>
           </div>
         </v-card>
+        <v-card class="card">
+          <v-card-title>Technical Skills</v-card-title>
+          <div v-for="skill in skills" :key="skill.name">
+            <v-card-title><b>- {{skill.name}}</b></v-card-title>
+            <v-container>
+              <p class="mx-4">Description: {{skill.description}}</p>
+              <p class="mx-4">Skill level: {{skill.level}}</p>
+            </v-container>
+          </div>
+        </v-card>
       </div>
     </v-container>
   </v-app>
@@ -47,6 +57,9 @@ export default {
     },
     education(){
       return this.$store.getters.education
+    },
+    skills(){
+      return this.$store.getters.skills
     }
   }
 }

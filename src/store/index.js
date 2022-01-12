@@ -12,11 +12,13 @@ export default new Vuex.Store({
     education: null,
     experiences: null,
     events: [],
+    fields: null,
     homepage: null,
     interests: null,
     introduction: null,
     learnings: null,
     projects: null,
+    skills: null,
     user: null
   },
   mutations: {
@@ -38,6 +40,9 @@ export default new Vuex.Store({
     setExperiences(state, payload){
       state.experiences = payload
     },
+    setFields(state, payload){
+      state.fields = payload
+    },
     setHomepage(state, payload){
       state.homepage = payload
     },
@@ -52,6 +57,9 @@ export default new Vuex.Store({
     },
     setProjects(state, payload){
       state.projects = payload
+    },
+    setSkills(state, payload){
+      state.skills = payload
     },
     login(state, payload){
       state.user = payload
@@ -173,6 +181,19 @@ export default new Vuex.Store({
         if (snapshot.exists()) {
           let projects = snapshot.val()
           commit('setProjects', projects)
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+    },
+    getSkills({commit}){
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, "skills/")).then((snapshot) => {
+        if (snapshot.exists()) {
+          let skills = snapshot.val()
+          commit('setSkills', skills)
         } else {
           console.log("No data available");
         }
@@ -310,7 +331,29 @@ export default new Vuex.Store({
         console.log(error.code + ': ' + error.message)
         commit('setLoading', false)
       })
-    }
+    },
+    getFields({commit}, payload){
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, payload + "/")).then((snapshot) => {
+        if (snapshot.exists()) {
+          commit('setFields', snapshot.val())
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+    },
+    addData({commit, state}, payload){
+      commit("setLoading", true)
+      state[payload.node].push(payload.data)
+      set(ref(getDatabase(), payload.node+ '/'), state[payload.node])
+      .then(() => {
+        commit("setLoading", false)
+      })
+      .catch((error)=> {
+        console.log(error)
+        commit("setLoading", false)
+      })
+    },
   },
   modules: {
   },
@@ -327,6 +370,9 @@ export default new Vuex.Store({
     events(state){
       return state.events.sort((a, b) => a.end < b.end ? - 1 : Number(a.end > b.end))
     },
+    fields(state){
+      return state.fields
+    },
     homepage(state){
       return state.homepage
     },
@@ -341,6 +387,9 @@ export default new Vuex.Store({
     },
     projects(state){
       return state.projects
+    },
+    skills(state){
+      return state.skills
     },
     user(state){
       return state.user

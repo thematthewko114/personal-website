@@ -98,6 +98,16 @@ const routes = [
     name: 'Revision Progress Tracker Signup',
     component: () => import("../views/Projects/RevisionTracker/Signup.vue")
   },
+  /*{
+    path: '/admin',
+    name: 'Admin',
+    component: () => import("../views/Admin.vue"),
+  },*/
+  {
+    path: "/projects/dts",
+    name: "Data Structures Visualizer",
+    component: () => import("../views/Projects/DataStructures.vue")
+  },
   {
     path: "*", //invalid path
     name: 'Error',

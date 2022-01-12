@@ -12,7 +12,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import VueClock from '@dangvanthanh/vue-clock';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import JsonViewer from 'vue-json-viewer'
 
 
 const firebaseConfig = {
@@ -31,6 +31,7 @@ Vue.mixin(titleMixin)
 Vue.use(VuePapaParse)
 Vue.component('downloadCsv', JsonCSV)
 Vue.component('downloadExcel', JsonExcel)
+Vue.use(JsonViewer)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyD2KRG2yfuSgD1CwsUM5kIkVqF3gAU-yj8',
@@ -55,9 +56,10 @@ new Vue({
     this.$store.dispatch('getIntroduction')
     this.$store.dispatch('getLearnings')
     this.$store.dispatch('getProjects')
+    this.$store.dispatch('getSkills')
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      if(user!=null){
+      if(user){
         this.$store.dispatch("autoLogin", user.uid)
       }
     })

@@ -6,6 +6,7 @@
           <v-spacer></v-spacer>
           <v-btn @click="logout" color="red">Log out</v-btn>
         </v-card-title>
+        <v-card-text>*This page is subjected to updates</v-card-text>
       </v-card>
       <v-card class="my-2 card">
         <v-card-title>Your Calendar
@@ -17,18 +18,37 @@
           No Data Available
         </v-card-text>
         <v-sheet
-          v-if="events.length"
           tile
           height="54"
           class="d-flex my-2 card"
         >
           <v-btn
             icon
-            class="ma-2"
+            class="ml-2"
             @click="$refs.calendar.prev()"
           >
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
+          <v-btn
+            class="mx-2"
+            icon
+            @click="$refs.calendar.next()"
+          >
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
+          <v-toolbar-title v-if="!$refs.calendar" class="mu-2">
+            {{ month }}
+          </v-toolbar-title>
+          <v-toolbar-title v-if="$refs.calendar" class="mu-2">
+            {{ $refs.calendar.title }}
+          </v-toolbar-title>
+        </v-sheet>
+        <v-sheet
+          v-if="events.length"
+          tile
+          height="54"
+          class="d-flex my-2 card"
+        >
           <v-select
             v-model="type"
             :items="types"
@@ -57,13 +77,6 @@
             class="ma-2"
           ></v-select>
           <v-spacer></v-spacer>
-          <v-btn
-            icon
-            class="ma-2"
-            @click="$refs.calendar.next()"
-          >
-            <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
         </v-sheet>
         <v-calendar
           v-if="events.length"
@@ -332,6 +345,12 @@ export default {
       this.editObj.endTime = event.end.split(" ")[1]
       this.editObj.date1 = event.start.split(" ")[0]
       this.editObj.date2 = event.end.split(" ")[0]
+      if(this.editObj.date1==this.editObj.date2){
+        this.single_day = true
+      }
+      else{
+        this.single_day = false
+      }
       this.editObj.content = event.content
       this.editObj.color = "Incomplete"
       this.editDialog = true
@@ -395,12 +414,6 @@ export default {
     }
   },
   computed:{
-    passwordMatch(){
-      if(this.password.length<8 || this.email.length<8){
-        return false
-      }
-      return this.password2 == this.password
-    },
     events(){
       return this.$store.getters.events
     },
@@ -417,6 +430,9 @@ export default {
     },
     user(){
       return this.$store.getters.user
+    },
+    month(){
+      return moment().format('MMMM YYYY')
     }
   },
   mounted(){
