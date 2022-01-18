@@ -6,7 +6,7 @@
       </v-card>
       <v-card class="card">
         <v-card-title>Stacks</v-card-title>
-        <v-card-subtitle class="ma-4">[<v-chip v-for="item in stack.elements">{{item}}</v-chip>]</v-card-subtitle>
+        <v-card-subtitle class="ma-4">[<v-chip v-for="item in stack.elements" :key="item">{{item}}</v-chip>]</v-card-subtitle>
         <v-text-field type="text" class="mx-4" v-model="pushItem" label="Enter number or string"></v-text-field>
         <v-card-subtitle>Size: {{stack.size}}</v-card-subtitle>
         <v-btn @click="push(pushItem)" :disabled="pushItem==null" class="ma-2">Push</v-btn>
@@ -14,7 +14,7 @@
       </v-card>
       <v-card class="card my-2">
         <v-card-title>Queues</v-card-title>
-        <v-card-subtitle class="ma-4">[<v-chip v-for="item in queue.elements">{{item}}</v-chip>]</v-card-subtitle>
+        <v-card-subtitle class="ma-4">[<v-chip v-for="item in queue.elements" :key="item">{{item}}</v-chip>]</v-card-subtitle>
         <v-text-field type="text" class="mx-4" v-model="pushItem2" label="Enter number or string"></v-text-field>
         <v-card-subtitle>Size: {{queue.size}}</v-card-subtitle>
         <v-btn @click="enqueue(pushItem2)" :disabled="pushItem2==null" class="ma-2">Enqueue</v-btn>
