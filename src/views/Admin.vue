@@ -76,6 +76,9 @@ export default {
     },
     add(){
       this.$store.dispatch('addData', {data: this.obj, node: this.node})
+      this.requiredFields = null
+      this.optionalFields = null
+      this.fields = this.$store.getters.fields
     }
   }
 }

@@ -8,11 +8,13 @@
         <v-card-title><b>About Me</b></v-card-title>
         <p v-if="introduction" class="pa-4">{{introduction[0].text}}</p>
       </v-card>
-      <div v-if="interests">
+      <v-card v-if="loading">
+        <v-progress-circular indeterminate></v-progress-circular>
+      </v-card>
+      <div v-if="!loading">
         <v-card class="my-2 card">
           <v-card-title><b>My Interests</b></v-card-title>
           <div v-for="interest in interests" :key="interest.id">
-            <!--<v-img :src="interest.image"></v-img>!-->
             <v-card-title><b> - {{interest.name}}</b></v-card-title>
             <v-container>
               <p class="mx-4">{{interest.description}}</p>
@@ -60,6 +62,9 @@ export default {
     },
     skills(){
       return this.$store.getters.skills
+    },
+    loading(){
+      return this.$store.getters.loading
     }
   }
 }

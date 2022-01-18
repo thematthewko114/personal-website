@@ -385,6 +385,9 @@ export default new Vuex.Store({
     learnings(state){
       return state.learnings
     },
+    loading(state){
+      return state.loading
+    },
     projects(state){
       return state.projects
     },
