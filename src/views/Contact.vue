@@ -7,7 +7,7 @@
       <v-card class="card">
         <v-container>
           <div v-for="contact in contacts" :key="contact.text">
-            <v-btn icon :to="contact.target"><v-icon size="x-large">{{contact.icon}}</v-icon></v-btn>
+            <v-btn icon :href="contact.target"><v-icon size="x-large">{{contact.icon}}</v-icon></v-btn>
             <v-card-title>{{contact.text}}</v-card-title>
           </div>
         </v-container>
