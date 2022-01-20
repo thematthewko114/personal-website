@@ -48,7 +48,7 @@ export default {
       this.pushItem = null
     },
     pop(){
-      this.stack.elements.splice(this.stack.length-1, 1)
+      this.stack.elements.pop()
       this.stack.size--
     },
     enqueue(item){
